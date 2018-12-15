@@ -1,0 +1,260 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/codemirror.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/mode/javascript/javascript.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/addon/edit/closebrackets.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/codemirror.css">
+
+<style>
+  * {
+    box-sizing: border-box;
+    color: #333;
+  }
+
+  body>div {
+    border: 1px solid lightgray;
+    position: absolute;
+  }
+
+  .CodeMirror {
+    height: auto;
+    font-size: 2em;
+  }
+
+  .task {
+    height: 50px;
+    border: 2px solid gray;
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 47px;
+  }
+
+  .taskContainer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+  #triggers {
+    padding: 11px;
+  }
+
+  #triggers > * {
+    font-size: 2em;
+  }
+
+  #help {
+    bottom: 10px; left: 10px; border: 0;
+    width: 25vw;
+  }
+
+  #help h3 {
+    margin: 0;
+  }
+
+  ul {
+    font-family: monospace;
+    font-size: 1.2em;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  .addMicro,.addAnimation,#microtaskqueue,#animationqueue {
+    display: none;
+  }
+
+
+</style>
+
+<div style="top: 10px; left: 41vw; right: 10px; height: 70px;" id="triggers">
+  <input type="number">
+  <button class="addTask">Task</button>
+  <button class="addMicro">MicroTask</button>
+  <button class="addAnimation">Animation</button>
+</div>
+<div id="editor" style="width: 40vw; top: 10px; left: 10px; bottom: 120px;"></div>
+
+<div id="help">
+  <h3>Available API</h3>
+  <ul style="float: left;">
+    <li>taskQueue</li>
+  </ul>
+  <ul style="float: right;">
+    <li>execute(task)</li>
+    <li>shouldRepaint()</li>
+    <li>repaint()</li>
+  </ul>
+</div>
+
+<button id="runBtn" onclick="run()" style="position: absolute; width: 100px; height: 100px; bottom: 10px; left: calc(40vw - 90px); font-size: 2em;">Run!</button>
+
+<div id="taskqueue" style="top: 100px; left: 41vw; width: 15vw; bottom: 120px; overflow: auto;">
+  <div class="taskContainer">
+  </div>
+</div>
+<div id="microtaskqueue" style="top: 100px; left: 57vw; width: 15vw; bottom: 120px; overflow: auto;">
+  <div class="taskContainer">
+  </div>
+</div>
+<div id="animationqueue" style="top: 100px; left: 73vw; width: 15vw; bottom: 120px; overflow: auto;">
+  <div class="taskContainer">
+  </div>
+</div>
+<div id="timesincerenderlabel" style="right: 10px; left: 89vw; top: 100px; font-size: 1.5em; text-align: center; border: 0;">Time
+  since last
+  render</div>
+
+<div id="renderTimeout" style="right: 10px; left: 89vw; top: 200px; font-size: 5em; text-align: center; border: 0;">0</div>
+
+<div id="currentLabel" style="bottom: 60px; font-size: 2.1em; text-align: center; left: 41vw; right: 10px; border: 0;"></div>
+<progress id="currentTask" value="0" max="100" style="position: absolute; bottom: 10px; left: 41vw; width: 58vw; height: 45px;"></progress>
+
+<script>
+  const mirror = CodeMirror(document.getElementById('editor'), {
+    lineNumbers: true,
+    autoCloseBrackets: true
+  });
+
+  const taskQueue = [];
+  const microTaskQueue = [];
+  const animationQueue = [];
+
+  let taskCounter = 0;
+  const timewarp = 500;
+
+  document.getElementById('triggers').addEventListener('click', evt => {
+    switch (evt.target.className) {
+      case 'addTask': addTask(parseInt(document.querySelector('#triggers input').value)); break;
+      case 'addMicro': addMicro(parseInt(document.querySelector('#triggers input').value)); break;
+      case 'addAnimation': addAnimation(parseInt(document.querySelector('#triggers input').value)); break;
+    }
+  });
+
+  function addTask(val) {
+    const newElement = document.createElement('div');
+    newElement.setAttribute('class', 'task');
+    newElement.textContent = `Task #${++taskCounter}: ${val}`;
+
+    taskQueue.unshift({ value: val, el: newElement });
+    const container = document.querySelector('#taskqueue .taskContainer');
+    container.insertBefore(newElement, container.firstChild);
+  }
+  function addMicro(val) {
+    const newElement = document.createElement('div');
+    newElement.setAttribute('class', 'task');
+    newElement.textContent = `MicroTask #${++taskCounter}: ${val}`;
+
+    microTaskQueue.unshift({ value: val, el: newElement });
+    const container = document.querySelector('#microtaskqueue .taskContainer');
+    container.insertBefore(newElement, container.firstChild);
+  }
+  function addAnimation(val) {
+    const newElement = document.createElement('div');
+    newElement.setAttribute('class', 'task');
+    newElement.textContent = `Animation #${++taskCounter}: ${val}`;
+
+    animationQueue.unshift({ value: val, el: newElement });
+    const container = document.querySelector('#animationqueue .taskContainer');
+    container.insertBefore(newElement, container.firstChild);
+  }
+
+  function run() {
+    const code = mirror.doc.getValue();
+    eval(`(async () => {${code}})()`);
+  }
+
+  function execute(task) {
+    return new Promise(resolve => {
+      if (!task) {
+        return window.setTimeout(resolve, 50);
+      }
+
+      {
+        const idx = taskQueue.indexOf(task);
+        if (idx > -1) {
+          taskQueue.splice(idx, 1);
+        }
+      }
+      {
+        const idx = microTaskQueue.indexOf(task);
+        if (idx > -1) {
+          microTaskQueue.splice(idx, 1);
+        }
+      }
+      {
+        const idx = animationQueue.indexOf(task);
+        if (idx > -1) {
+          animationQueue.splice(idx, 1);
+        }
+      }
+      task.el.parentNode.removeChild(task.el);
+      document.querySelector('#currentLabel').textContent = task.el.textContent;
+      const start = Date.now();
+      const end = Date.now() + task.value * timewarp;
+      const delta = end - start;
+      const progBar = document.querySelector('#currentTask');
+      progBar.max = delta;
+      function animate() {
+        const prog = delta - end + Date.now();
+        if (prog > delta) {
+          progBar.value = 0;
+          document.querySelector('#currentLabel').textContent = '';
+          resolve();
+        } else {
+          progBar.value = prog;
+          requestAnimationFrame(animate);
+        }
+      }
+      animate();
+    });
+  }
+
+  let timeSinceRender = 0;
+  let rendering = false;
+  const renderTime = 3;
+  window.setInterval(() => {
+    if (rendering) {
+      return;
+    }
+    const newTime = ++timeSinceRender;
+    if (newTime > 16) {
+      document.getElementById('renderTimeout').style.color = 'red';
+    } else {
+      document.getElementById('renderTimeout').style.color = '#333';
+    }
+    document.getElementById('renderTimeout').textContent = newTime;
+  }, timewarp);
+
+
+  function shouldRepaint() {
+    return timeSinceRender >= 16;
+  }
+
+  function repaint() {
+    return new Promise(resolve => {
+      rendering = true;
+      document.querySelector('#currentLabel').textContent = 'Rendering';
+      const start = Date.now();
+      const end = Date.now() + renderTime * timewarp;
+      const delta = end - start;
+      const progBar = document.querySelector('#currentTask');
+      progBar.max = delta;
+      function animate() {
+        const prog = delta - end + Date.now();
+        if (prog > delta) {
+          rendering = false;
+          timeSinceRender = 0;
+          progBar.value = 0;
+          document.getElementById('renderTimeout').textContent = 0;
+          document.querySelector('#currentLabel').textContent = '';
+          resolve();
+        } else {
+          progBar.value = prog;
+          requestAnimationFrame(animate);
+        }
+      }
+      animate();
+    });
+  }
+
+</script>

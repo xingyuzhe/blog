@@ -1,0 +1,64 @@
+<style>
+  .output {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .output div {
+    flex: 1;
+    padding: 20px;
+    background-color: aqua;
+    border: solid 1px #fff;
+  }
+
+  .output div.green {
+    background-color: green;
+  }
+</style>
+
+<button id="btn">promsie in timeout</button>
+<div id="output" class="output"></div>
+
+<script>
+  function block() {
+    let count = 0;
+    for (let i = 0; i < 50000; i++) {
+      count++;
+    }
+  }
+
+  function buildItems(num, color = '') {
+    let html = "";
+    for (let i = 0; i < num; i++) {
+      html += `<div class="${color}"></div>`;
+    }
+    return html;
+  }
+
+  const btn = document.getElementById("btn");
+  btn.onclick = function() {
+    let html = "";
+    for (let i = 0; i < 100; i++) {
+      html += `<div></div>`;
+    }
+
+    const output = document.getElementById("output");
+
+    setTimeout(function setTimeout1 () {
+      block()
+      output.innerHTML = buildItems(100)
+      Promise.resolve().then(function promise1() {
+        console.log('promise1')
+      })
+    }, 0)
+
+    setTimeout(function setTimeout2 () {
+      block()
+      output.innerHTML = buildItems(100, 'green')
+      Promise.resolve().then(function promise2() {
+        console.log('promise2')
+      })
+    }, 0)
+  };
+</script>

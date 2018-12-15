@@ -1,0 +1,22 @@
+<button onclick="doIt()">Run Script</button>
+
+<script>
+  document.body.addEventListener('click', () => console.log(1));
+  document.body.addEventListener('click', () => console.log(2), true);
+
+  function doIt() {
+    setTimeout(() => console.log(3));
+
+    console.log(4);
+
+    setTimeout(() => console.log(5), 0);
+
+    // Promise.resolve().then(() => {
+    //   console.log(8)
+    // })
+
+    requestAnimationFrame(() => console.log(6));
+
+    new Promise(() => console.log(7));
+  }
+</script>

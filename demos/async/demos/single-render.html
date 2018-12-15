@@ -1,0 +1,29 @@
+<style>
+  .output {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap
+  }
+
+  .output div {
+    flex: 1;
+    padding: 20px;
+    background-color: aqua;
+    border: solid 1px #fff;
+  }
+</style>
+
+<button onclick="drawMany(200000)">single render</button>
+<div id="output" class="output"></div>
+
+
+<script>
+function drawMany(limit) {
+  const output = document.getElementById('output')
+  
+  for (let i = 0; i < limit; i++) {
+    output.appendChild(document.createElement('div'))
+  }
+}
+
+</script>

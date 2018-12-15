@@ -1,0 +1,54 @@
+<style>
+    .output {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap
+    }
+  
+    .output div {
+      flex: 1;
+      padding: 20px;
+      background-color: aqua;
+      border: solid 1px #fff;
+    }
+  </style>
+  
+  <button  id="btn">mutiple setTimeout</button>
+  <div id="output" class="output"></div>
+  
+  <script>
+  function block() {
+    let count = 0
+    for (let i = 0; i < 50000; i++) {
+      count++;
+    }
+  }
+
+  function buildItems(num) {
+    let html = ''
+    for (let i = 0; i < num; i++) {
+      html += `<div></div>`
+    }
+    return html
+  }
+  
+  const btn = document.getElementById('btn')
+  btn.onclick = function () {
+    let html = ''
+    for (let i = 0; i < 100; i++) {
+      html += `<div></div>`
+    }
+  
+    const output = document.getElementById('output')
+  
+    setTimeout(function setTimeout1 () {
+      block()
+      output.innerHTML = buildItems(100)
+    }, 0)
+
+    setTimeout(function setTimeout2 () {
+      block()
+      output.innerHTML = buildItems(100)
+    }, 0)
+  };
+  </script>

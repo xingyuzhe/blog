@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .hljs {
+    padding: 0;
+  }
+  
+  .event-loop {
+    font-size: 18px;
+    background-color: #23241f;
+    width: 800px;
+  }
+  
+  .code-stack, .code-stack-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border:whitesmoke solid 1px;
+  }
+
+  .code-stack-title p {
+    flex-grow: 1;
+    color: #fff;
+  }
+
+  .code-stack-title p, .code-stack-title div {
+    padding: 0.4em 0;
+    text-align: center;
+  }
+
+  .code-stack-title div {
+    color: #666;
+    flex-basis: 10em;
+  }
+  
+  .stack, .column  {
+    width: 10em;
+    display: flex;
+    flex-basis: 10em;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    background-color:darkgrey;
+    border-left: #23241f solid 2px;
+  }
+
+  .column {
+    flex-direction: column;
+  }
+  
+  .stack .item, .column .item {
+    width: 100%;
+    display: block;
+    height: 2.5em;
+    background-color: chartreuse;
+    text-align: center;
+    line-height: 2.5em;
+    color: #999;
+    border: slategray solid 1px;
+  }
+
+  
+  .webapis .item {
+    background-color: goldenrod;
+  }
+  
+  .code {
+    position: relative;
+    flex-grow: 1;
+  }
+  
+  .code-current {
+    background-color: rgba(255,255,255,.3);
+    height: 1.2em;
+    top: 0;
+  
+    position: absolute;
+    left: 0;
+    right: 0;
+    /* transform: translateY(2.4em); */
+  }
+  
+  .queue {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-color: #ddd;
+    height: 2.5em;
+    width: 100%;
+  }
+  
+  .queue .item {
+    background-color: aqua;
+    display: inline-block;
+    padding: 0 0.5em;
+    height: 100%;
+    line-height: 2.5em;
+    min-width: 5em;
+    border: silver solid 1px;
+  }
+  
+  .micro-task-queue .item {
+    background-color: aquamarine;
+  }
+  
+  .console {
+    background-color: #f8f8f8;
+    height: 10em;
+  }
+  
+  .console h3 {
+    padding: 0.5em;
+    color: #ddd;
+  }
+
+  .console p {
+    color: #ddd;
+    padding-left: 1em;
+  }
+  
+  .queue-table {
+    display: table;
+    width: 100%;
+    background-color: #eee;
+    border-spacing: 2px;
+    border-color: grey;
+    border-collapse: collapse;
+  }
+  
+  .queue-table tr {
+    border-top: #fff solid 1px;
+  }
+  
+  .queue-table th {
+    font-weight: 900;
+    background-color:#ddd;
+    color: #999;
+    width: 10em;
+  }
+  
+  .actions {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    border-top: solid 2px #fff;
+    background-color: #ddd;
+  }
+  
+  /* .actions i {
+    font-size: 2.5em;
+    cursor: pointer;
+  }
+  
+  .actions i:first-child {
+    margin-right: 0.5em;
+  } */
+  
+  /* .button {
+    display: inline-block;
+    line-height: 3em;
+    padding: 0 1em;
+    border: 0;
+    background-color: grey;
+    margin-left: 2px;
+    cursor: pointer;
+  } */
+  
+  .event-loop-circle {
+    padding: 0.2em;
+    text-align: center;
+    line-height: 3em;
+    font-size: 3em;
+    background-color: ghostwhite;
+  }
+
+  .queue-enter-active {
+    animation: task-in .5s;
+  }
+  .queue-leave-active {
+    animation: task-out .5s;
+  }
+  @keyframes task-in {
+    0% {
+      transform: scale(0.1) translateX(100em) translateY(-100em);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1) translateX(0) translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes task-out {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-10em);
+      opacity: 0;
+    }
+  }
+
+
+  .stack-enter-active {
+    animation: stack-in .5s;
+  }
+  .stack-leave-active {
+    animation: stack-out .5s;
+  }
+  @keyframes stack-in {
+    0% {
+      transform: scale(0.5) translateX(-10em) translateY(-20em);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1) translateX(0) translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes stack-out {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-5em) translateY(-3em);
+      opacity: 0;
+    }
+  }
+
+
+  .column-enter-active {
+    animation: stack-in .5s;
+  }
+  .column-leave-active {
+    animation: stack-out .5s;
+  }
+  @keyframes column-in {
+    0% {
+      transform: scale(0.5) translateX(-10em) translateY(-20em);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1) translateX(0) translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes column-out {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-30em) translateY(20em);
+      opacity: 0;
+    }
+  }

@@ -1,0 +1,34 @@
+<style>
+.output {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap
+}
+
+.output div {
+    flex: 1;
+    padding: 20px;
+    background-color: aqua;
+    border: solid 1px #fff;
+}
+</style>
+
+<button onclick="drawFew(0, function() {})">queue render</button>
+<div id="output" class="output"></div>
+  
+<script>
+var LIMIT = 200000;
+var CHUNK = 1000;
+
+function drawFew(start, callback) {
+    for (var i = 0; i < CHUNK; i++) {
+        output.appendChild(document.createElement('div'));
+    }
+
+    if (start >= LIMIT) return callback();
+
+    setTimeout(function() {
+        drawFew(start + CHUNK, callback);
+    }, 0);
+}    
+</script>
