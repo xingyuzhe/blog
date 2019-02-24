@@ -1,0 +1,28 @@
+{
+  "name": "blog",
+  "version": "0.1.0",
+  "description": "",
+  "main": "1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xingyuzhe/blog.git"
+  },
+  "keywords": [
+    "blog",
+    "leetcode",
+    "interview"
+  ],
+  "author": "yuzhe.xing",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xingyuzhe/blog/issues"
+  },
+  "homepage": "https://github.com/xingyuzhe/blog#readme",
+  "dependencies": {
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3333"
+  }
+}

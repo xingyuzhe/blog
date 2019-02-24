@@ -1,20 +1,23 @@
-import { sleep } from './sleep'
+import { delay } from './delay'
 
 interface RetryOptions {
+  // 异步函数调用的参数
   callbackOptions?: object
+  // 成功判断条件
   checkIsOk?: Function
+  // 达到最大失败次数回调
   onMaxFail?: Function
-  delay?: number
+  // 重试延迟时间
+  interval?: number
+  // 最大尝试次数
   max?: number
 }
 
 /**
  * 异步函数, 失败自动重试
+ * @param caller 调用上下文
  * @param callback 异步函数
- * @param callbackOptions 异步函数调用的参数
- * @param checkIsOk 成功判断条件
- * @param onMaxFail 达到最大失败次数回调
- * @param max 最大尝试次数
+ * @param retryOptions 重试参数
  * @param count 当前第几次重试(不需要传)
  */ 
 export async function retry(caller: any, callback: Function, retryOptions: RetryOptions = {}, count = 0) {
@@ -22,7 +25,7 @@ export async function retry(caller: any, callback: Function, retryOptions: Retry
     callbackOptions,
     checkIsOk,
     onMaxFail,
-    delay = 0,
+    interval = 0,
     max = 2
   } = retryOptions
 
@@ -40,7 +43,7 @@ export async function retry(caller: any, callback: Function, retryOptions: Retry
 
   if (!onMaxFail) {
     onMaxFail = () => {
-      console.warn(`retry ${max} 次重试失败!`)
+      logger.warn(`retry ${max} 次重试失败!`)
     }
   }
 
@@ -50,7 +53,7 @@ export async function retry(caller: any, callback: Function, retryOptions: Retry
   }
 
   if (count > 0) {
-    console.warn(`retry 第${count}次`)
+    logger.warn(`retry 第${count}次`)
   }
 
   try {
@@ -63,10 +66,10 @@ export async function retry(caller: any, callback: Function, retryOptions: Retry
     throw new Error('retry result not satisfied')
   } catch(e) {
     if (delay) {
-      await sleep(delay)
+      await delay(interval)
     }
     count = count + 1
-    logger.error(e)
+    logger.warn(e)
     await retry(caller, callback, retryOptions, count)
   }
 }

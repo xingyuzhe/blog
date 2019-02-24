@@ -1,4 +1,4 @@
-var simpleQuickSort = function(nums) {
+var quickSort = function(nums) {
   if (!nums) return []
   if (nums.length < 2) return nums
 
@@ -18,26 +18,4 @@ var simpleQuickSort = function(nums) {
   }
 
   return quickSort(leftNums).concat([center], quickSort(rightNums))
-}
-
-var swap = function (arr, i, j) {
-  const tmp = arr[i]
-  arr[i] = arr[j]
-  arr[j] = tmp
-}
-
-var partition = function() {
-
-}
-
-var sort = function(nums, i, j) {
-  if (i >= j) return
-
-  const pivot = partition(nums, i, j)
-  sort(nums, i, pivot - 1)
-  sort(nums, pivot + 1, j)
-}
-
-var quickSort = function(nums) {
-  sort(nums, 0, nums.length - 1)
 }
