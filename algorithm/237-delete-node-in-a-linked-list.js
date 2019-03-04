@@ -10,5 +10,5 @@
  * @return {void} Do not return anything, modify node in-place instead.
  */
 var deleteNode = function(node) {
-    
+    // @TODO
 };
