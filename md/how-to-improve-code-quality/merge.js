@@ -25,9 +25,9 @@ function generateImageUrl(name) {
   curPath.unshift('gh-pages')
   curPath.unshift(projectName)
 
-  curPath = ['https://raw.githubusercontent.com/xingyuzhe'].concat(curPath).join('/')
+  curPath = ['raw.githubusercontent.com/xingyuzhe'].concat(curPath).join('/')
 
-  return path.join(curPath, name)
+  return 'https://' + path.join(curPath, name).replace(/\\/g, '/')
 }
 
 try {

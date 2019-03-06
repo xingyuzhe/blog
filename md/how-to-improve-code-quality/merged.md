@@ -75,7 +75,7 @@
 
 ## 背景: 熵增定律
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\shang.png)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/shang.png)
 
 > 在无外力影响的情况下，烂代码只会原来越多。
 
@@ -85,15 +85,15 @@
 
 > 烂代码产生的常见原因是业务压力大，导致没有时间或意愿讲究代码质量。因为向业务压力妥协而生产烂代码之后，开发效率会随之下降，导致业务压力更大，形成一种典型的恶性循环。
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\loop1.png)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/loop1.png)
 
 > 为了应对业务压力，常见的做法就是向项目中增加人力，但是单纯地增加人力的话，会因为风格不一致、沟通成本上升等原因导致烂代码更多。
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\loop2.png)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/loop2.png)
 
 > 要遏制这种恶性循环，需要多管齐下，主动对代码质量进行管控，并且持续进行技术升级，系统性地解决问题。
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\loop3.png)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/loop3.png)
 
 
 现实中实际上很多情况是这样: 质量不够, 人力来凑。
@@ -120,7 +120,7 @@
 
 总结: 保命保平安, 有前途
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\wtf.jpg)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/wtf.jpg)
 
 我之前曾经接手一个IM项目, 当时的情景是这样:
 
@@ -149,7 +149,7 @@
 
 ## 没有边界
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\big_mud_ball.jpg)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/big_mud_ball.jpg)
 
 - 不分上下文/层级, 模块间随意互相调用, 交叉污染
 - 一个功能的代码可以分散到世界的各个角落
@@ -181,7 +181,7 @@
 
 - 里三圈, 外三圈, 脖子扭扭, 屁股扭扭...
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\ooo.jpg)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/ooo.jpg)
 
 ## 长代码行
 
@@ -361,17 +361,17 @@
 
 下面是个人觉得实用的入门资料:
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\es6.jpg)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/es6.jpg)
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\nodejs.jpg)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/nodejs.jpg)
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\clean.jpg)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/clean.jpg)
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\leetcode.jpg)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/leetcode.jpg)
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\ds.jpg)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/ds.jpg)
 
-![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\domain.jpg)
+![image](https://raw.githubusercontent.com/xingyuzhe/blog/gh-pages/md/how-to-improve-code-quality/assets/domain.jpg)
 
 ## 模仿优秀的代码
 
