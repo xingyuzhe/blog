@@ -33,6 +33,14 @@
 
 ### **程序的目的是要解决现实中的问题, 最终还是人的问题**
 
+## 前端
+
+- 本质适配端, 解决状态与UI的同步问题
+
+## 后端
+
+- 本质上解决数据管理和流动的问题
+
 ## 前端的难点在哪
 
 - 数据 + UI + 交互: 状态管理复杂, 变更频繁，难抽象
@@ -141,11 +149,14 @@
 
 ## 没有边界
 
-![1](./assets/big_mud_ball.jpg)
+![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\big_mud_ball.jpg)
 
 - 不分上下文/层级, 模块间随意互相调用, 交叉污染
 - 一个功能的代码可以分散到世界的各个角落
 - 本来只需要依赖几个模块, 结果引用一大堆
+
+
+所谓架构师, 就是一个很会拆的人。
 
 ## 过程式编程
 
@@ -155,7 +166,7 @@
 
 ## 异常处理缺失或者混乱
 
-- 从不验证
+- 从不验证外源数据
 - 不管异常
 - 不打日志
 - 日志不写上下文
@@ -170,7 +181,7 @@
 
 - 里三圈, 外三圈, 脖子扭扭, 屁股扭扭...
 
-![1](./assets/ooo.jpg)
+![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\ooo.jpg)
 
 ## 长代码行
 
@@ -186,7 +197,6 @@
 - 写了完全没用, 除了碍眼
 - 不注释机关陷阱
 - 假注释: 改代码但是不改注释
-- 理解你的心情, 但是不要再写f*ck了
 
 ## 无用的代码
 
@@ -195,7 +205,7 @@
 
 ## 没有代码保护
 
-- 任何外部模块都可以随意访问和修改
+- 任何外部模块都可以随意访问和修改, 你在写公用库/API时尤其要重视这一点
 
 ## 参数个数巨多的函数
 
@@ -343,24 +353,29 @@
 - 专业背景知识的掌握
 - 数据结构和算法
 - 设计模式和原则
+- 英语姿势水平
+
+前端工程师首先是工程师, 然后才是前端。
+不要总觉得数据结构,算法,设计模式是后端的东西, 这都是基本素质, 和前后端无关。
+随着5G、AI、AR/VR等技术的落地普及, 前端领域很可能切换新的开发方式, 有新的要求，对人员的基本素养要求将会越来越高。
 
 下面是个人觉得实用的入门资料:
 
-![es6](./assets/es6.jpg)
+![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\es6.jpg)
 
-![es6](./assets/nodejs.jpg)
+![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\nodejs.jpg)
 
-![es6](./assets/clean.jpg)
+![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\clean.jpg)
 
-![es6](./assets/leetcode.jpg)
+![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\leetcode.jpg)
 
-![es6](./assets/ds.jpg)
+![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\ds.jpg)
 
-![es6](./assets/domain.jpg)
+![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\domain.jpg)
 
 ## 模仿优秀的代码
 
-## 再忙, 停下来, 多总结, 多思考
+## 再忙, 停下来, 抬头看天, 多总结, 多思考
 
 ## 代码标准
 
@@ -407,26 +422,7 @@
 ## 详细的日志
 
 
+# Reference
 
-# 嵌套, 多维数组, 循环请求
-
-- key: getInsuranceInfoFromInner
-
-# 300， 500, 600行函数, 硬编码, 多重嵌套
-
-- key: getScheduleList
-- key: getSchedule
-- key: aggregationAll
-- key: addProTaskBasicForSix
-
-# 无用代码
-
-- key: CmaScheduleService
-- key: CreditService
-- key: CheckRecordService
-- key: const autoDecision 
-
-# 重复
-
-- key: CommonService
+- [代码质量的4个阶段](https://zhuanlan.zhihu.com/p/29086959)
 
