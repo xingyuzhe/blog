@@ -120,7 +120,7 @@
 
 总结: 保命保平安, 有前途
 
-![https://github.com/labs42io/clean-code-typescript](./assets/wtf.jpg)
+![image](https:\raw.githubusercontent.com\xingyuzhe\blog\gh-pages\md\how-to-improve-code-quality\assets\wtf.jpg)
 
 我之前曾经接手一个IM项目, 当时的情景是这样:
 
