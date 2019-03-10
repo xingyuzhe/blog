@@ -9,13 +9,11 @@
  * @param {TreeNode} root
  * @return {number[][]}
  */
-var zigzagLevelOrder = function(root) {
+var levelOrder = function(root) {
   if (!root) return []
     const queue = [[root]]
 
     const ans = []
-
-    let level = 0
 
     while (queue.length) {
       const nodeWrap = queue.pop()
@@ -32,15 +30,24 @@ var zigzagLevelOrder = function(root) {
         }
       })
 
-      if (numWrap.length) {
-        ans.push(level & 1 ? numWrap.reverse() : numWrap)
-      }
-
-      if (newNodeWrap.length) {
-        queue.push(newNodeWrap)
-        level++
-      }
+      newNodeWrap.length && queue.push(newNodeWrap)
+      numWrap.length && ans.push(numWrap)
     }
 
     return ans
-};
+}
+
+// function TreeNode(val) {
+//   this.val = val
+//   this.left = this.right = null
+// }
+
+// function buildTree(list) {
+//   const root = new TreeNode()
+
+//   for (let num of list) {
+
+//   }
+// }
+
+// levelOrder(buildTree([3,9,20,null,null,15,7]))
