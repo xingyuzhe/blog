@@ -37,17 +37,18 @@ var uniquePathsDFS = function(m, n) {
 var uniquePaths = function (m, n) {
   const cache = Array(m).fill(0).map(() => Array(n).fill(0))
 
-  return partial(m, n, cache)
+  return partial(m - 1, n - 1, cache)
 }
 
 function partial(m, n, cache) {
-  if (cache[m - 1][n - 1]) return cache[m - 1][n - 1]
-  if (m === 1 || n === 1) return 1
+  if (m < 0 || n < 0) return 0
+  if (m === 0 && n === 0) return 1
+  if (cache[m][n]) return cache[m][n]
 
   const leftPaths = partial(m - 1, n, cache)
   const rightPaths = partial(m, n - 1, cache)
 
-  cache[m - 1][n - 1] = leftPaths + rightPaths
+  cache[m][n] = leftPaths + rightPaths
 
-  return cache[m - 1][n - 1]
+  return cache[m][n]
 }
